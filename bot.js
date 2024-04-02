@@ -1,4 +1,20 @@
-const { Client, GatewayIntentBits } = require("discord.js");
+/*
+
+  ██████╗░████████╗██╗░░██╗           
+  ██╔══██╗╚══██╔══╝╚██╗██╔╝          
+  ██████╔╝░░░██║░░░░╚███╔╝░          
+  ██╔══██╗░░░██║░░░░██╔██╗░          
+  ██║░░██║░░░██║░░░██╔╝╚██╗          
+  ╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝          
+
+
+   # MADE BY RTX!! FEEL FREE TO USE ANY PART OF CODE
+   ## FOR HELP CONTACT ME ON DISCORD
+   ## Contact    [ DISCORD SERVER :  https://discord.gg/FUEHs7RCqz ]
+   ## YT : https://www.youtube.com/channel/UCPbAvYWBgnYhliJa1BIrv0A
+*/
+
+const { Client, GatewayIntentBits, Partials } = require("discord.js");
 const { DisTube } = require("distube");
 const { SpotifyPlugin } = require("@distube/spotify");
 const { SoundCloudPlugin } = require("@distube/soundcloud");
@@ -71,62 +87,7 @@ fs.readdir(config.commandsDir, (err, files) => {
   });
 });
 
-// Music Bot Code
 
-client.on('message', async message => {
-  if (message.author.bot) return;
-  if (!message.content.startsWith(config.prefix)) return;
-
-  const args = message.content.slice(config.prefix.length).trim().split(/ +/);
-  const command = args.shift().toLowerCase();
-
-  if (command === 'join') {
-    if (message.member.voice.channel) {
-      const connection = await message.member.voice.channel.join();
-      message.channel.send('Joined the voice channel!');
-    } else {
-      message.channel.send('You need to be in a voice channel to use this command!');
-    }
-  } else if (command === 'leave') {
-    const connection = message.guild.me.voice.connection;
-    if (connection) {
-      connection.disconnect();
-      message.channel.send('Left the voice channel!');
-    } else {
-      message.channel.send('I\'m not in a voice channel!');
-    }
-  } else if (command === 'play') {
-    if (!args[0]) return message.channel.send('Please provide a song name or link!');
-    const connection = message.guild.me.voice.connection;
-    if (!connection) return message.channel.send('I\'m not in a voice channel!');
-    const dispatcher = connection.play(args[0]);
-    dispatcher.on('start', () => {
-      message.channel.send(`Now playing: ${args[0]}`);
-    });
-    dispatcher.on('finish', () => {
-      message.channel.send('Song finished!');
-    });
-    dispatcher.on('error', console.error);
-  } else if (command === 'pause') {
-    const connection = message.guild.me.voice.connection;
-    if (connection && connection.dispatcher) {
-      connection.dispatcher.pause();
-      message.channel.send('Song paused!');
-    } else {
-      message.channel.send('I\'m not playing anything!');
-    }
-  } else if (command === 'resume') {
-    const connection = message.guild.me.voice.connection;
-    if (connection && connection.dispatcher) {
-      connection.dispatcher.resume();
-      message.channel.send('Song resumed!');
-    } else {
-      message.channel.send('I\'m not playing anything!');
-    }
-  }
-});
-
-// End of Music Bot Code
 
 if (config.TOKEN || process.env.TOKEN) {
   client.login(config.TOKEN || process.env.TOKEN).catch((e) => {
@@ -137,6 +98,7 @@ if (config.TOKEN || process.env.TOKEN) {
     console.log('TOKEN ERROR❌❌');
   }, 2000);
 }
+
 
 if(config.mongodbURL || process.env.MONGO){
   const mongoose = require("mongoose")
@@ -151,6 +113,7 @@ if(config.mongodbURL || process.env.MONGO){
   console.log('\x1b[32m%s\x1b[0m', `|    🍔 Error MongoDB!`)
   }
 
+
 const express = require("express");
 const app = express();
 const port = 3000;
@@ -163,3 +126,19 @@ app.listen(port, () => {
   console.log(`✨ Happy New Year Welcome To 2024`);
 });
 printWatermark();
+
+/*
+
+  ██████╗░████████╗██╗░░██╗           
+  ██╔══██╗╚══██╔══╝╚██╗██╔╝          
+  ██████╔╝░░░██║░░░░╚███╔╝░          
+  ██╔══██╗░░░██║░░░░██╔██╗░          
+  ██║░░██║░░░██║░░░██╔╝╚██╗          
+  ╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝          
+
+
+   # MADE BY RTX!! FEEL FREE TO USE ANY PART OF CODE
+   ## FOR HELP CONTACT ME ON DISCORD
+   ## Contact    [ DISCORD SERVER :  https://discord.gg/FUEHs7RCqz ]
+   ## YT : https://www.youtube.com/channel/UCPbAvYWBgnYhliJa1BIrv0A
+*/
